@@ -18,8 +18,8 @@ class AssetTests(unittest.TestCase):
                 with wave.open(str(ROOT / 'assets/audio' / f'{name}.wav')) as clip:
                     self.assertEqual(clip.getsampwidth(), 2)
                     self.assertEqual(clip.getnchannels(), 1)
-                    self.assertEqual(clip.getframerate(), 22050)
-                    self.assertGreater(clip.getnframes(), 22050)
+                    self.assertIn(clip.getframerate(), (22050, 24000))
+                    self.assertGreater(clip.getnframes(), clip.getframerate())
                     self.assertTrue(any(clip.readframes(clip.getnframes())))
 
     def test_display_frames_have_distinct_sleep_and_wake_artwork(self):

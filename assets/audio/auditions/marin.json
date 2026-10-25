@@ -1,0 +1,9 @@
+{
+  "file": "marin.wav",
+  "voice": "marin",
+  "text": "Why did the skeleton stay at home? He had no body to go with!",
+  "model": "gpt-4o-mini-tts",
+  "instructions": "Speak with a natural British English accent as a warm, friendly, playful pumpkin telling a joke to young children. Sound like an expressive storyteller, relaxed and conversational, never robotic, menacing or startling. Use a little amused warmth in the punchline and a brief natural pause after the question. Read only the supplied words. Do not add an introduction, sound effects or laughter.",
+  "sample_rate": 24000,
+  "ai_generated": true
+}

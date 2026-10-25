@@ -1,0 +1,10 @@
+{
+  "file": "fable-bumbling.wav",
+  "voice": "fable",
+  "text": "Why did the skeleton stay at home? He had no body to go with!",
+  "model": "gpt-4o-mini-tts",
+  "style": "bumbling",
+  "instructions": "Perform as a lovable bumbling pumpkin in a children's cartoon, with a British English accent. Use an endearingly daft, rounded, slightly wobbly voice, bouncy changes of pitch and comic hesitation. Be cheerfully puzzled by the question, then delighted and very pleased with your terrible punchline. Exaggerate the character rather than sounding like a polished narrator. Keep every word clear, warm and gentle; never frightening. Pause briefly before the punchline. Say only the supplied words, with no extra dialogue, laughter or sound effects.",
+  "sample_rate": 24000,
+  "ai_generated": true
+}

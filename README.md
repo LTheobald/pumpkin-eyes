@@ -41,7 +41,9 @@ python -m pumpkin --mute            # visual-only rehearsal
 
 The renderer produces a separate 240×240 frame for each eye. Blinking, glancing and gentle sleeping movement are generated in code; there are no external image assets to obtain.
 
-Ten jokes and a soft procedural snore are included under `assets/audio/`. The jokes use macOS's installed **Daniel** British voice. Regenerate them on the Mac after changing `pumpkin/jokes.json`:
+Ten jokes and a soft procedural snore are included under `assets/audio/`. The active jokes use AI-generated **Fable with pantomime storyteller delivery**, selected after the voice auditions. Original Daniel Mac clips are preserved under `assets/audio/original-macos/`. Regenerate AI speech after editing `pumpkin/jokes.json` using the [voice guide](docs/voice-samples.md).
+
+The original offline Mac generator is also available as a fallback; running this replaces the active jokes with Daniel:
 
 ```sh
 python tools/prepare_audio.py
@@ -49,13 +51,13 @@ python tools/prepare_audio.py
 
 The generation script validates that speech is nonempty. If it reports sandbox restrictions or an unavailable voice, run it in your normal Mac terminal and check **System Settings → Accessibility → Read & Speak** for installed voices. `say -v '?'` lists installed voices; use `--voice 'voice name'` to select one.
 
-For a richer character, we can replace these WAV files with approved AI speech later. Match the existing clip names; mono 22,050 Hz PCM WAV is the preparation format. The running pumpkin never contacts a speech service. `assets/audio/manifest.json` records the current scripts and voice settings.
+Use the [voice audition guide](docs/voice-samples.md) and `tools/generate_speech.py` for new auditions or regenerating jokes. Credentials stay in an ignored local `.env` file. Auditions are saved separately from the active clips; the player supports mono 16-bit WAV at 22,050 or 24,000 Hz. The running pumpkin never contacts a speech service. `assets/audio/manifest.json` identifies the active voice; `speech-manifest.json` records the AI generation scripts and instructions.
 
 ## Raspberry Pi build
 
 Read [the build plan and wiring diagram](PLAN.md) before connecting hardware. It covers the Breakout Garden bench stage, a separate final wiring configuration, PIR timing, Bluetooth, battery testing, secure credentials and deployment.
 
-**Pi software is implemented and ready for bench testing; physical hardware is not yet verified.** No Pi hardware libraries are installed by the desktop requirements. Follow the [Pi setup guide](docs/raspberry-pi.md) for installation, one-screen checks, Garden/direct configurations, PIR warmup, Bluetooth and the user auto-start service.
+**Screens, animation and Bluetooth audio are verified on the Pi 4 with the Garden. PIR and final wiring tests are deferred while refining the character.** No Pi hardware libraries are installed by the desktop requirements. Follow the [Pi setup guide](docs/raspberry-pi.md) for installation, one-screen checks, Garden/direct configurations, PIR warmup, Bluetooth and startup services.
 
 After installing the Pi requirements and enabling SPI on the Pi, begin with:
 

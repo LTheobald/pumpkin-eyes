@@ -1,0 +1,102 @@
+[
+  {
+    "file": "skeleton.wav",
+    "voice": "fable",
+    "text": "Why did the skeleton stay at home? He had no body to go with!",
+    "model": "gpt-4o-mini-tts",
+    "style": "pantomime",
+    "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  },
+  {
+    "file": "ghost.wav",
+    "voice": "fable",
+    "text": "What is a ghost's favourite dessert? I scream!",
+    "model": "gpt-4o-mini-tts",
+    "style": "pantomime",
+    "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  },
+  {
+    "file": "pumpkin.wav",
+    "voice": "fable",
+    "text": "What do you get when you drop a pumpkin? Squash!",
+    "model": "gpt-4o-mini-tts",
+    "style": "pantomime",
+    "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  },
+  {
+    "file": "witch.wav",
+    "voice": "fable",
+    "text": "Why did the witch take a nap? She needed to rest for a spell!",
+    "model": "gpt-4o-mini-tts",
+    "style": "pantomime",
+    "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  },
+  {
+    "file": "vampire.wav",
+    "voice": "fable",
+    "text": "What is a vampire's favourite fruit? A neck tarine!",
+    "model": "gpt-4o-mini-tts",
+    "style": "pantomime",
+    "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  },
+  {
+    "file": "mummy.wav",
+    "voice": "fable",
+    "text": "What music do mummies listen to? Wrap music!",
+    "model": "gpt-4o-mini-tts",
+    "style": "pantomime",
+    "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  },
+  {
+    "file": "monster.wav",
+    "voice": "fable",
+    "text": "Why did the monster eat a light bulb? He wanted a light snack!",
+    "model": "gpt-4o-mini-tts",
+    "style": "pantomime",
+    "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  },
+  {
+    "file": "boo.wav",
+    "voice": "fable",
+    "text": "What do you call a ghost with a broken leg? A hobbling goblin!",
+    "model": "gpt-4o-mini-tts",
+    "style": "pantomime",
+    "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  },
+  {
+    "file": "bat.wav",
+    "voice": "fable",
+    "text": "Why did the bat miss the bus? He was just hanging around!",
+    "model": "gpt-4o-mini-tts",
+    "style": "pantomime",
+    "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  },
+  {
+    "file": "broom.wav",
+    "voice": "fable",
+    "text": "Why was the witch's broom late? It over swept!",
+    "model": "gpt-4o-mini-tts",
+    "style": "pantomime",
+    "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  }
+]

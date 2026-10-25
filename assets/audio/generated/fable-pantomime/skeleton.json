@@ -1,0 +1,10 @@
+{
+  "file": "skeleton.wav",
+  "voice": "fable",
+  "text": "Why did the skeleton stay at home? He had no body to go with!",
+  "model": "gpt-4o-mini-tts",
+  "style": "pantomime",
+  "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+  "sample_rate": 24000,
+  "ai_generated": true
+}

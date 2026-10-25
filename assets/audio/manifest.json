@@ -1,9 +1,14 @@
 {
-  "provider": "macOS say (installed voice)",
-  "voice": "Daniel",
-  "rate": 155,
-  "sample_rate": 22050,
-  "snore": "procedural, seed 7",
+  "provider": "OpenAI Speech API",
+  "model": "gpt-4o-mini-tts",
+  "voice": "fable",
+  "style": "pantomime",
+  "ai_generated": true,
+  "sample_rate": 24000,
+  "snore": {
+    "provider": "procedural, seed 7",
+    "sample_rate": 22050
+  },
   "jokes": [
     {
       "id": "skeleton",

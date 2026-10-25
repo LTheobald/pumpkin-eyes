@@ -1,0 +1,32 @@
+[
+  {
+    "file": "fable-bumbling.wav",
+    "voice": "fable",
+    "text": "Why did the skeleton stay at home? He had no body to go with!",
+    "model": "gpt-4o-mini-tts",
+    "style": "bumbling",
+    "instructions": "Perform as a lovable bumbling pumpkin in a children's cartoon, with a British English accent. Use an endearingly daft, rounded, slightly wobbly voice, bouncy changes of pitch and comic hesitation. Be cheerfully puzzled by the question, then delighted and very pleased with your terrible punchline. Exaggerate the character rather than sounding like a polished narrator. Keep every word clear, warm and gentle; never frightening. Pause briefly before the punchline. Say only the supplied words, with no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  },
+  {
+    "file": "fable-pantomime.wav",
+    "voice": "fable",
+    "text": "Why did the skeleton stay at home? He had no body to go with!",
+    "model": "gpt-4o-mini-tts",
+    "style": "pantomime",
+    "instructions": "Perform as a cheeky, flamboyant British pantomime pumpkin entertaining young children. Use playful theatrical projection, exaggerated rising and falling intonation and a knowing mischievous smile in your voice. Make the question wonderfully dramatic, pause for comic anticipation, then land the punchline with a jaunty flourish. Sound like a silly character, not a neutral audiobook reader. Stay friendly and comfortably conversational in volume, never shout or frighten. Say only the supplied words, no extra dialogue, laughter or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  },
+  {
+    "file": "fable-sleepy.wav",
+    "voice": "fable",
+    "text": "Why did the skeleton stay at home? He had no body to go with!",
+    "model": "gpt-4o-mini-tts",
+    "style": "sleepy",
+    "instructions": "Perform as a cuddly, sleepy little pumpkin monster in a children's story, with a British English accent. Use a softly gravelly, rounded, gently dopey cartoon voice and a leisurely drowsy rhythm for the question. Pause, then perk up with goofy excitement and a smile for the punchline. Make the contrast funny and endearing. Keep the gravel subtle and the speech clear; no threatening growls, whispering or sudden loudness. Say only the supplied words, no extra dialogue, laughter, yawns or sound effects.",
+    "sample_rate": 24000,
+    "ai_generated": true
+  }
+]
