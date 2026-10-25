@@ -1,0 +1,13 @@
+[Unit]
+Description=Prepare Pi 4 SPI for pumpkin displays
+# Check id -u on the Pi; replace 1000 if the app user has another UID.
+Before=user@1000.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/pumpkin-spi-prepare
+RemainAfterExit=yes
+TimeoutStartSec=30
+
+[Install]
+WantedBy=multi-user.target

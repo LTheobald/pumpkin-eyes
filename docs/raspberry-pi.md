@@ -1,6 +1,6 @@
 # Raspberry Pi bench setup
 
-The Pi runner is implemented, but has not been tested on physical hardware. Start with the Garden and simulated motion. Use mains power for the first tests, then test the power bank with the complete assembly.
+The Pi runner supports Pi 4 and Pi 5, but physical verification is still in progress. Start with the Garden and simulated motion. Use mains power for the first tests, then test the power bank with the complete assembly. Confirm the actual model with `cat /proc/device-tree/model`; a `pinctrl-bcm2711` controller suggests a Pi 4-family board, whereas Pi 5 header GPIO uses RP1. The 40-pin wiring and app configurations are the same for these two models. Power requirements depend on the actual board.
 
 ## 1. Prepare the Pi
 
@@ -14,7 +14,44 @@ sudo apt install git python3-venv python3-dev build-essential libasound2-dev lib
 sudo raspi-config
 ```
 
-In raspi-config, enable SPI under Interface Options, then reboot. The two LCDs do not require I2C. Check both SPI devices and your group memberships:
+In raspi-config, enable SPI under Interface Options. Both supplied wiring configurations use GPIO9 for display DC, which can conflict with standard SPI's MISO reservation. **On the owner's current Pi/OS, adding the `spi0-2cs,no_miso` overlay coincided with failure to boot, and removing it restored boot. Keep that recovered configuration intact while diagnosing GPIO9. Do not reapply the overlay as a routine setup step on this machine.**
+
+Collect these read-only diagnostics on the booted Pi before making another change:
+
+```sh
+cat /proc/device-tree/model
+uname -r
+pinctrl get 9
+grep -nE '^\[|^[[:space:]]*(dtparam|dtoverlay|include)' /boot/firmware/config.txt
+systemctl --user is-active pumpkin.service
+```
+
+The supplied diagnostics confirm a **Pi 4 Model B Rev 1.4**, kernel **6.18.50+rpt-rpi-v8**, GPIO9 assigned to `SPI0_MISO`, and an inactive pumpkin service. The next bench experiment is a temporary runtime overlay, with the SPI driver unloaded while changing its pin assignment. This leaves the recovered boot configuration untouched.
+
+With no SPI application running, execute these **one at a time**, stopping and recording the output if any command fails:
+
+```sh
+sudo modprobe -r spi_bcm2835
+sudo dtoverlay spi0-2cs no_miso
+sudo modprobe spi_bcm2835
+```
+
+**Owner verification:** all three commands succeeded, followed by several successful display tests on this Pi. The runtime preparation is therefore the current working approach. It needs repeating after each reboot. If the session encounters trouble, reboot to discard the runtime overlay and return to the recovered boot configuration. Leave the boot configuration unchanged. [Dynamic Device Tree documentation](https://www.raspberrypi.com/documentation/computers/configuration.html#dynamic-device-tree), [overlay parameters](https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README).
+
+The repository includes an optional helper and root startup unit for this same sequence. They are not installed automatically. Install only on the confirmed Pi 4, with SPI apps stopped. Run `id -u` and, if the result differs from 1000, adjust the `Before=user@1000.service` line in `deploy/pumpkin-spi.service` to match the app user's UID. This orders preparation before that user's services at boot; it does not grant the app root access.
+
+```sh
+sudo install -m 0755 deploy/prepare-spi.sh /usr/local/sbin/pumpkin-spi-prepare
+sudo install -m 0644 deploy/pumpkin-spi.service /etc/systemd/system/pumpkin-spi.service
+sudo systemctl daemon-reload
+sudo systemctl enable pumpkin-spi.service
+```
+
+If you have already run the manual commands during the current boot, **do not start the helper now**: let it run on the next reboot, so the overlay is not added twice. After reboot, check `systemctl status pumpkin-spi.service` and repeat the eye test. The helper uses a `/run` marker to avoid repeating its own successful preparation within one boot. The root startup unit still requires its own cold-boot test; the successful manual sequence does not verify systemd ordering.
+
+To undo the automatic workaround, run `sudo systemctl disable pumpkin-spi.service`, then reboot. No SD-card editing is needed. Always stop the pumpkin app before manually restarting or preparing SPI.
+
+The two LCDs do not require I2C. Check both SPI devices and your group memberships:
 
 ```sh
 ls -l /dev/spidev0.0 /dev/spidev0.1 /dev/gpiochip*
@@ -48,6 +85,8 @@ If the test reports `No module named 'st7789'`, the interpreter running it canno
 Use `.venv/bin/python` for the eye test too, so installation and execution use the same environment. If pip fails, resolve its installation error before retrying; do not use sudo pip or install into the system Python as a workaround.
 
 If an older checkout reports `ST7789 has no attribute get_dc_pin`, update the project code. That was an adapter bug caused by using a development-branch helper absent from the pinned release. The corrected adapter requests GPIO through `gpiodevice` and passes the line handles to the released driver's constructor. No driver upgrade or wiring change is needed for that error. CI now checks the actual ST7789 1.0.1 constructor, with SPI/GPIO substituted, as well as the app's fake-driver tests.
+
+If startup says `GPIO9 ... currently claimed by None`, the SPI MISO reservation is a hypothesis, not a confirmed owner. Collect the diagnostics above and check whether the pumpkin service or another GPIO app is running. On the affected setup, preserve the bootable configuration rather than retrying `no_miso`. Do not force a claimed GPIO into another function while its owner is active. With the Garden, changing `dc` in TOML alone cannot solve this because both slots are physically connected to GPIO9.
 
 ## 2. Check the screens
 

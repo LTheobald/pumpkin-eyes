@@ -10,6 +10,8 @@ Keep the personality silly: rounded green or amber irises, large pupils, soft hi
 
 Confirmed choices:
 
+Hardware correction during bench testing: the active board identifies itself as a Raspberry Pi 4 Model B Rev 1.4, rather than the originally listed Pi 5. The GPIO-header wiring is unchanged. References to Pi 5 power limits below describe the original hardware assessment; measure stability and endurance on the confirmed Pi 4 assembly.
+
 - First test on the Mac, with no electronics attached.
 - One joke per wake cycle, with no immediate repeat of the previous joke.
 - Friendly British voice, with speech generated and saved ahead of time.
@@ -104,7 +106,7 @@ flowchart LR
 | PIR ground | GND | 9 | PIR `GND` |
 | PIR signal | GPIO17 | 11 | PIR `OUT` |
 
-All grounds are electrically common. The LCDs do not need MISO; GPIO9 is intentionally used as a DC output, following Pimoroni's wiring convention. Enable SPI0 and leave MISO unconnected. There is no external reset wire in this seven-pin display interface. The speaker uses its own battery, with no GPIO audio wiring.
+All grounds are electrically common. The LCDs do not need MISO; GPIO9 is intentionally used as a DC output, following Pimoroni's wiring convention. Leaving MISO unwired alone does not free GPIO9 from a kernel SPI reservation. The documented `spi0-2cs,no_miso` overlay coincided with a boot failure on the owner's current setup; removing it restored boot. Preserve the recovered boot configuration and follow the Pi guide's read-only diagnostic steps before another change. There is no external reset wire in this seven-pin display interface. The speaker uses its own battery, with no GPIO audio wiring.
 
 Pimoroni specifies 3.3V/5V supply compatibility for these LCD breakouts and documents their signal labels. The second chip select and separate right-eye DC pin are our configuration choices. [LCD wiring reference](https://shop.pimoroni.com/products/1-3-spi-colour-lcd-240x240-breakout).
 
@@ -159,5 +161,7 @@ Keep electronics and battery in a dry, ventilated enclosure separated from pumpk
 The Mac prototype is implemented with procedural eyes, simulated motion, the 20-second inactivity rule, one joke per visit, prepared Daniel British speech, captions, mute and optional quiet snores. See README.md for commands and verification.
 
 Pi adapters, shared desktop/Pi behaviour, separate Garden/direct TOML configurations, a labelled display check and a user auto-start service with Bluetooth reconnection are implemented. See [the Pi bench guide](docs/raspberry-pi.md). Software tests use fake hardware; physical wiring, actual screen speed, Pi audio, cold boot and battery endurance still require bench verification. Final speech character selection can follow that rehearsal. The bank's 5V/3A output is confirmed from the owner's label photograph.
+
+Pi bench progress: the owner confirmed multiple successful display tests after unloading `spi_bcm2835`, applying `spi0-2cs no_miso` at runtime and reloading the driver. Keep the recovered boot configuration unchanged. An optional root oneshot service now repeats the working sequence at startup; that service's cold-boot behaviour is not yet tested. Animated eyes, PIR, speaker and battery rehearsal remain to verify on the Pi.
 
 This is a build plan, not a claim that physical wiring has been tested. Hardware adapter details must be verified on the actual Pi before final assembly.
