@@ -1,0 +1,126 @@
+# macOS metadata and filesystem housekeeping
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100/
+.Trashes/
+.fseventsd/
+.TemporaryItems/
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux desktop metadata and temporary editor files
+.directory
+.Trash-*/
+*~
+*.swp
+*.swo
+.#*
+\#*\#
+
+# Python bytecode and compiled extensions (macOS and Linux)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dylib
+
+# Python virtual environments: recreate separately on each machine
+.venv/
+venv/
+env/
+ENV/
+__pypackages__/
+.Python
+
+# Python packaging and build output
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+pip-wheel-metadata/
+wheelhouse/
+MANIFEST
+
+# Test, coverage, lint, and type-checking caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+coverage.json
+*.cover
+*.py,cover
+.hypothesis/
+.tox/
+.nox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+.cache/
+
+# Notebook checkpoints and generated documentation
+.ipynb_checkpoints/
+docs/_build/
+
+# Local environment variables and credentials; keep example templates
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+.envrc
+.direnv/
+.aws/
+
+# Local Python/tool configuration
+.python-version
+.tool-versions
+.pypirc
+pip-log.txt
+pip-delete-this-directory.txt
+.uv/
+
+# Logs and temporary runtime files
+*.log
+*.pid
+*.pid.lock
+*.stackdump
+/tmp/
+/temp/
+
+# VS Code: retain useful, shareable project configuration
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
+
+# Codex local authentication, session history, caches, and runtime state
+# Keep project instructions, skills, and shared Codex configuration tracked.
+.codex/auth.json
+.codex/history.jsonl
+.codex/sessions/
+.codex/archived_sessions/
+.codex/log/
+.codex/logs/
+.codex/tmp/
+.codex/shell_snapshots/
+.codex/sqlite/
+.codex/*.sqlite*
+.codex/*.db*
+.codex/models_cache.json
+.codex/version.json
+.codex/.codex-global-state.json*
+.codex/.personality_migration
+
+# Keep AGENTS.md, .agents/skills/, dependency manifests, and lockfiles tracked.
+# ChatGPT desktop stores its app data outside the repository by default.
