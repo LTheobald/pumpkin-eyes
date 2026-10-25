@@ -1,0 +1,19 @@
+# PIM445 Breakout Garden: left = CE0/back slot; right = CE1/front slot.
+# The schematic connects CE0's BL to BCM18 (PWM), and CE1's BL to BCM19.
+[left]
+cs = 0
+dc = 9
+backlight = 18
+rotation = 90
+
+[right]
+cs = 1
+dc = 9
+backlight = 19
+rotation = 90
+
+[runtime]
+pir_pin = 17
+warmup = 60
+spi_speed = 16000000
+fps = 8

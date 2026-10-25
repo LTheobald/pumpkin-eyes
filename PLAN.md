@@ -110,21 +110,21 @@ Pimoroni specifies 3.3V/5V supply compatibility for these LCD breakouts and docu
 
 The specified PIR needs a 4.8–20V supply and provides 3.3V/0V logic, so use 5V for its supply and connect its OUT directly to the Pi input. Verify the labels on the actual module. Do not put 5V onto a Pi GPIO signal pin. [PIR pinout and electrical specifications](https://shop.pimoroni.com/products/pir-motion-sensor).
 
-Keep SPI leads short, initially around 10–15 cm. Start conservatively at 8 MHz, with a target of 15–20 frames per second for the pair, then measure on the assembled hardware. Reduce speed if longer wiring causes corruption. Provide secure connectors and strain relief for the final assembly; loose breadboard jumpers are suitable for bench tests.
+Keep SPI leads short, initially around 10–15 cm. The supplied configurations target 8 frames per second at 16 MHz. The pair requires about 1.84 million SPI bits per full frame, so 15–20 frames per second requires a higher clock and must be measured on the assembled hardware. For longer or unreliable wiring, start at 8 MHz and 4 frames per second. Provide secure connectors and strain relief for the final assembly; loose breadboard jumpers are suitable for bench tests.
 
 ### Breakout Garden bench configuration
 
 Fit the HAT with the Pi powered off, then insert one LCD in each seven-contact SPI slot, matching the printed labels. Do not use the five-contact I2C slots. The HAT supports two SPI breakouts. Check clearance above any Pi 5 cooler and use suitable standoffs. [HAT reference](https://shop.pimoroni.com/products/breakout-garden-hat-i2c-spi).
 
-Use a separate `garden` display configuration based on its schematic: CE0 and CE1 select the two displays, and the DC connection is shared. Share a single requested GPIO line handle between driver instances and update the displays serially; asking the modern GPIO library to request that same line twice can fail. Confirm the per-slot backlight mapping from the schematic during the hardware adapter implementation. The direct wiring table above must not be applied to screens already connected through the HAT. [PIM445 schematic](https://cdn.shopify.com/s/files/1/0174/1800/files/breakout_hat_spi_PIM445.pdf?v=1621325469).
+Use `config/pi-garden.toml`: CE0 and CE1 select the two displays, and GPIO9 is the shared DC connection. The schematic confirms GPIO18 (PWM) for CE0's backlight and GPIO19 for CE1's. The adapter shares a single requested DC line handle between driver instances and updates the displays serially; requesting that same line twice can fail. The direct wiring table above must not be applied to screens already connected through the HAT. [PIM445 schematic](https://cdn.shopify.com/s/files/1/0174/1800/files/breakout_hat_spi_PIM445.pdf?v=1621325469).
 
 GPIO17 remains our intended PIR input, but the HAT's extension header does not expose every Pi pin. Check access before fitting it; use a suitable stacking header or GPIO splitter if needed. Test simulated motion on the Pi first if the PIR connection is awkward.
 
 ## Raspberry Pi software and deployment
 
-Use a current 64-bit Raspberry Pi OS image and a project virtual environment. Enable SPI. Use the current Pimoroni ST7789 driver, whose source uses `gpiod`/`gpiodevice`, rather than following the older RPi.GPIO installation commands in its README. Confirm and lock a Pi-tested release during the hardware phase. [Driver source](https://github.com/pimoroni/st7789-python/blob/main/st7789/__init__.py).
+Use a current 64-bit Raspberry Pi OS image and a project virtual environment with Python 3.11 or newer. Enable SPI. The Pi requirements pin Pimoroni ST7789 1.0.1, whose source uses `gpiod`/`gpiodevice`, rather than following the older RPi.GPIO installation commands in its README. The pinned version still needs verification on the actual Pi. [Driver source](https://github.com/pimoroni/st7789-python/blob/main/st7789/__init__.py).
 
-For the PIR, use GPIO Zero with its `lgpio` backend, which supports Pi 5. Avoid hard-coding a gpiochip number: identify the controller on the actual OS image. [GPIO Zero pin backend documentation](https://gpiozero.readthedocs.io/en/stable/api_pins.html).
+The PIR adapter uses the same `gpiod`/`gpiodevice` stack as the display driver. It discovers `GPIO17` by name and ignores readings during its configured 60-second warmup. This avoids a second GPIO backend and hard-coded gpiochip numbers. [Pimoroni GPIO API](https://pypi.org/project/gpiodevice/).
 
 First run interactively with the speaker paired and selected as the audio output. Then create a user service that starts with the user's audio session, restarts on failure and writes bounded logs. Verify startup after a complete power cycle without a monitor, including Bluetooth reconnection. If using a headless user service, configure lingering and confirm the audio service and Bluetooth policy operate in that session.
 
@@ -158,6 +158,6 @@ Keep electronics and battery in a dry, ventilated enclosure separated from pumpk
 
 The Mac prototype is implemented with procedural eyes, simulated motion, the 20-second inactivity rule, one joke per visit, prepared Daniel British speech, captions, mute and optional quiet snores. See README.md for commands and verification.
 
-Pi adapters, final speech character selection, the auto-start service and physical verification remain subsequent phases. The bank's 5V/3A output is now confirmed from the owner's label photograph. Verify stable power and battery endurance against the agreed 3–4 hour requirement.
+Pi adapters, shared desktop/Pi behaviour, separate Garden/direct TOML configurations, a labelled display check and a user auto-start service with Bluetooth reconnection are implemented. See [the Pi bench guide](docs/raspberry-pi.md). Software tests use fake hardware; physical wiring, actual screen speed, Pi audio, cold boot and battery endurance still require bench verification. Final speech character selection can follow that rehearsal. The bank's 5V/3A output is confirmed from the owner's label photograph.
 
 This is a build plan, not a claim that physical wiring has been tested. Hardware adapter details must be verified on the actual Pi before final assembly.

@@ -1,6 +1,6 @@
 # Pumpkin Eyes 🎃
 
-A friendly pumpkin with blinking eyes and terrible jokes. This first version runs on a Mac with simulated motion, original code-generated eye artwork and prepared British speech. It operates offline and needs no API key.
+A friendly pumpkin with blinking eyes and terrible jokes. Run the Mac preview with simulated motion, or use the Raspberry Pi runner with two SPI LCDs and a PIR. Both use the same original eye renderer, behaviour and prepared British speech. It operates offline and needs no API key.
 
 ![Desktop preview](docs/preview-awake.png)
 
@@ -55,7 +55,16 @@ For a richer character, we can replace these WAV files with approved AI speech l
 
 Read [the build plan and wiring diagram](PLAN.md) before connecting hardware. It covers the Breakout Garden bench stage, a separate final wiring configuration, PIR timing, Bluetooth, battery testing, secure credentials and deployment.
 
-**This version is the desktop prototype. The Pi display/PIR adapters and automatic-start service are planned, not implemented or hardware-tested yet.** No Pi hardware libraries are installed by the desktop requirements.
+**Pi software is implemented and ready for bench testing; physical hardware is not yet verified.** No Pi hardware libraries are installed by the desktop requirements. Follow the [Pi setup guide](docs/raspberry-pi.md) for installation, one-screen checks, Garden/direct configurations, PIR warmup, Bluetooth and the user auto-start service.
+
+After installing the Pi requirements and enabling SPI on the Pi, begin with:
+
+```sh
+.venv/bin/python -m pumpkin --mode pi --display-test --eye left --seconds 10
+.venv/bin/python -m pumpkin --mode pi --motion demo --mute --seconds 25
+```
+
+Once the screens pass and the PIR is wired, use `--mode pi` for real motion. The default configuration is `config/pi-garden.toml`; use `--config config/pi-direct.toml` only after removing the Garden and following the final wiring diagram.
 
 The agreed physical target is an enclosed porch, 3–4 hours between charges, with the Pi already in a cooled case and accessible GPIO. The power bank's label confirms 5V/3A USB-C output, making it a candidate for bench testing. Stable power and endurance still need verification on the actual assembly. Power only the Pi from the bank and use the speaker's own battery; see the plan for the power budget.
 
@@ -68,4 +77,4 @@ python -m unittest discover -s tests -v
 SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy python -m pumpkin --demo --seconds 2
 ```
 
-GitHub Actions repeats these checks on pushes and pull requests. Deployment to the Pi remains a deliberate pull of a known-good commit; no cloud hosting or public network access is needed.
+GitHub Actions repeats these checks on pushes and pull requests. Tests cover shared animation/audio scheduling, GPIO ownership and cleanup, PIR warmup and configuration conflicts using fake hardware. They cannot validate actual wiring, display refresh rate or Bluetooth on a Pi. Deployment remains a deliberate pull of a known-good commit; no cloud hosting or public network access is needed.

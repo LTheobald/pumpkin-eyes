@@ -1,0 +1,24 @@
+[Unit]
+Description=Playful Halloween pumpkin
+Wants=pipewire-pulse.service wireplumber.service
+After=pipewire-pulse.service wireplumber.service
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+WorkingDirectory=%h/pumpkin-eyes
+Environment=PYTHONUNBUFFERED=1
+Environment=SDL_AUDIODRIVER=pulseaudio
+EnvironmentFile=%h/.config/pumpkin/environment
+ExecStartPre=%h/pumpkin-eyes/.venv/bin/python tools/wait_for_speaker.py
+ExecStart=%h/pumpkin-eyes/.venv/bin/python -m pumpkin --mode pi --config config/pi-garden.toml
+Restart=on-failure
+RestartSec=15
+TimeoutStartSec=120
+TimeoutStopSec=10
+LogRateLimitIntervalSec=30
+LogRateLimitBurst=60
+
+[Install]
+WantedBy=default.target

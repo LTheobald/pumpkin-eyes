@@ -1,0 +1,2 @@
+# Replace with the address shown by bluetoothctl devices after pairing/trusting.
+PUMPKIN_SPEAKER=AA:BB:CC:DD:EE:FF

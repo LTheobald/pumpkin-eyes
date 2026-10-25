@@ -1,0 +1,5 @@
+-r requirements.txt
+# Linux GPIO character-device ABI v2; deliberately separate from desktop deps.
+st7789==1.0.1
+gpiodevice==0.1.0
+gpiod>=2.2,<3

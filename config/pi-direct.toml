@@ -1,0 +1,18 @@
+# Matches the final direct-wiring table in PLAN.md; remove the Garden first.
+[left]
+cs = 0
+dc = 9
+backlight = 13
+rotation = 90
+
+[right]
+cs = 1
+dc = 25
+backlight = 19
+rotation = 90
+
+[runtime]
+pir_pin = 17
+warmup = 60
+spi_speed = 16000000
+fps = 8
