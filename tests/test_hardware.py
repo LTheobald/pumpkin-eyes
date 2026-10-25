@@ -15,14 +15,6 @@ class FakeDriver:
     instances = []
     fail_cs = None
 
-    @classmethod
-    def get_dc_pin(cls, pin):
-        request = Mock()
-        cls.lines.append((pin, request))
-        return request, pin
-
-    get_bl_pin = get_dc_pin
-
     def __init__(self, **kwargs):
         self.options = kwargs
         self._spi = Mock()
@@ -39,6 +31,13 @@ class HardwareContractTests(unittest.TestCase):
         FakeDriver.lines = []
         FakeDriver.instances = []
         FakeDriver.fail_cs = None
+        def request_output(pin, label):
+            request = Mock()
+            FakeDriver.lines.append((f"GPIO{pin}", request))
+            return request, pin
+        patcher = patch('pumpkin.hardware.request_output', side_effect=request_output)
+        patcher.start()
+        self.addCleanup(patcher.stop)
 
     def test_garden_requests_shared_dc_once_and_routes_each_eye(self):
         config = PiConfig.load(ROOT / 'config/pi-garden.toml')

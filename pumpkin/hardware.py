@@ -53,6 +53,17 @@ class PiConfig:
             raise ValueError("Backlights need separate pins and must not share a DC pin")
 
 
+def request_output(pin, label):
+    """Own GPIO requests independently of the display driver's helper methods."""
+    import gpiod
+    import gpiodevice
+    from gpiod.line import Direction, Value
+
+    return gpiodevice.get_pin(
+        f"GPIO{pin}", label,
+        gpiod.LineSettings(direction=Direction.OUTPUT, output_value=Value.INACTIVE))
+
+
 class SpiDisplays:
     def __init__(self, config, eye="both", driver_cls=None):
         config.validate()
@@ -67,9 +78,9 @@ class SpiDisplays:
                 if eye != "both" and eye != ("left" if side == 0 else "right"):
                     continue
                 if pins.dc not in dc_lines:
-                    dc_lines[pins.dc] = driver_cls.get_dc_pin(f"GPIO{pins.dc}")
+                    dc_lines[pins.dc] = request_output(pins.dc, "pumpkin-dc")
                     self.stack.callback(dc_lines[pins.dc][0].release)
-                backlight = driver_cls.get_bl_pin(f"GPIO{pins.backlight}")
+                backlight = request_output(pins.backlight, "pumpkin-bl")
                 self.stack.callback(backlight[0].release)
                 # Register cleanup before __init__: it can fail after opening SPI.
                 display = driver_cls.__new__(driver_cls)

@@ -2,6 +2,8 @@
 import argparse
 import logging
 import math
+import shlex
+import sys
 import time
 from pathlib import Path
 
@@ -41,6 +43,12 @@ def main():
         from .pi import run
         try:
             run(args, ROOT)
+        except ModuleNotFoundError as exc:
+            logging.error("Pi dependency missing: %s", exc.name)
+            logging.error("Install the Pi dependencies using the same Python interpreter:\n%s",
+                          shlex.join([sys.executable, "-m", "pip", "install", "-r",
+                                      str(ROOT / "requirements-pi.txt")]))
+            raise SystemExit(1) from exc
         except (ImportError, OSError, ValueError, RuntimeError) as exc:
             logging.error("Pi startup/runtime failed: %s", exc)
             raise SystemExit(1) from exc

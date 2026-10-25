@@ -38,6 +38,17 @@ python3 -m venv .venv
 
 The Pi requirements pin ST7789 1.0.1, which uses `gpiod` rather than old RPi.GPIO. The PIR uses the same GPIO stack and finds the line by name (`GPIO17`), without assuming `/dev/gpiochip0` or `/dev/gpiochip4`. Desktop mode does not import these optional hardware libraries. [Pimoroni driver](https://github.com/pimoroni/st7789-python), [GPIO helper API](https://pypi.org/project/gpiodevice/).
 
+If the test reports `No module named 'st7789'`, the interpreter running it cannot find the Pi driver. Installing only `requirements.txt` prepares the desktop preview, not the hardware adapters. From the project directory on the Pi, run:
+
+```sh
+.venv/bin/python -m pip install -r requirements-pi.txt
+.venv/bin/python -c 'import st7789; print(st7789.__file__)'
+```
+
+Use `.venv/bin/python` for the eye test too, so installation and execution use the same environment. If pip fails, resolve its installation error before retrying; do not use sudo pip or install into the system Python as a workaround.
+
+If an older checkout reports `ST7789 has no attribute get_dc_pin`, update the project code. That was an adapter bug caused by using a development-branch helper absent from the pinned release. The corrected adapter requests GPIO through `gpiodevice` and passes the line handles to the released driver's constructor. No driver upgrade or wiring change is needed for that error. CI now checks the actual ST7789 1.0.1 constructor, with SPI/GPIO substituted, as well as the app's fake-driver tests.
+
 ## 2. Check the screens
 
 Power off, fit the Garden using suitable standoffs, and insert the LCDs in its **seven-contact SPI slots** with their labels aligned. Check case/cooler clearance. Power back on.

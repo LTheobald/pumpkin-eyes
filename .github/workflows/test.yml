@@ -15,6 +15,9 @@ jobs:
           python-version: ${{ matrix.python }}
           cache: pip
       - run: python -m pip install -r requirements.txt
+      - name: Install released driver for constructor compatibility check
+        # GPIO/SPI/numpy are substituted in this test; no hardware is required.
+        run: python -m pip install --no-deps st7789==1.0.1
       - run: python -m unittest discover -s tests -v
       - name: Render and audio smoke test
         env:
