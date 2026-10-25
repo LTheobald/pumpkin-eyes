@@ -1,0 +1,12 @@
+[
+  {"id":"skeleton", "setup":"Why did the skeleton stay at home?", "punchline":"He had no body to go with!"},
+  {"id":"ghost", "setup":"What is a ghost's favourite dessert?", "punchline":"I scream!"},
+  {"id":"pumpkin", "setup":"What do you get when you drop a pumpkin?", "punchline":"Squash!"},
+  {"id":"witch", "setup":"Why did the witch take a nap?", "punchline":"She needed to rest for a spell!"},
+  {"id":"vampire", "setup":"What is a vampire's favourite fruit?", "punchline":"A neck tarine!"},
+  {"id":"mummy", "setup":"What music do mummies listen to?", "punchline":"Wrap music!"},
+  {"id":"monster", "setup":"Why did the monster eat a light bulb?", "punchline":"He wanted a light snack!"},
+  {"id":"boo", "setup":"What do you call a ghost with a broken leg?", "punchline":"A hobbling goblin!"},
+  {"id":"bat", "setup":"Why did the bat miss the bus?", "punchline":"He was just hanging around!"},
+  {"id":"broom", "setup":"Why was the witch's broom late?", "punchline":"It over swept!"}
+]
